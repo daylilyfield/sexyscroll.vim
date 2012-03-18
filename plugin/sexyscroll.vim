@@ -1,4 +1,26 @@
-if g:did_load_sexyscroll
+" --------------------------------------------------------------------------- 
+" Copyright (c) 2012, DAYLILYFIELD {{{
+"
+" Permission is hereby granted, free of charge, to any person obtaining a
+" copy of this software and associated documentation files (the "Software"),
+" to deal in the Software without restriction, including without limitation 
+" the rights to use, copy, modify, merge, publish, distribute, sublicense, 
+" and/or sell copies of the Software, and to permit persons to whom the 
+" Software is furnished to do so, subject to the following conditions:
+"
+" The above copyright notice and this permission notice shall be included in
+" all copies or substantial portions of the Software.
+"
+" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+" IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, 
+" FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+" AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+" LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+" FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+" DEALINGS IN THE SOFTWARE. }}}
+" --------------------------------------------------------------------------- 
+
+if exists('g:did_load_sexyscroll')
     finish
 endif
 
@@ -145,8 +167,10 @@ function! s:get_comparable_current_time()
 endfunction
 
 if g:sexyscroll_map_recommended_settings
-    nnoremap <buffer> <C-d> :<C-u>call g:sexyscroll('down', &scroll, 500)<CR>
-    nnoremap <buffer> <C-u> :<C-u>call g:sexyscroll('up', &scroll, 500)<CR>
-    nnoremap <buffer> <C-f> :<C-u>call g:sexyscroll('down', &scroll * 2, 500)<CR>
-    nnoremap <buffer> <C-b> :<C-u>call g:sexyscroll('up', &scroll * 2, 500)<CR>
+    nnoremap <silent> <buffer> <C-d> :<C-u>call g:sexyscroll('down', &scroll, 500)<CR>
+    nnoremap <silent> <buffer> <C-u> :<C-u>call g:sexyscroll('up', &scroll, 500)<CR>
+    nnoremap <silent> <buffer> <C-f> :<C-u>call g:sexyscroll('down', &scroll * 2, 500)<CR>
+    nnoremap <silent> <buffer> <C-b> :<C-u>call g:sexyscroll('up', &scroll * 2, 500)<CR>
 endif
+
+" vim: foldmethod=marker
