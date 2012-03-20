@@ -1,6 +1,8 @@
 " --------------------------------------------------------------------------- 
 " Copyright (c) 2012, DAYLILYFIELD {{{
 "
+" MIT License
+"
 " Permission is hereby granted, free of charge, to any person obtaining a
 " copy of this software and associated documentation files (the "Software"),
 " to deal in the Software without restriction, including without limitation 
@@ -160,8 +162,10 @@ endfunction
 function! s:get_comparable_current_time()
 
     let current_time = reltimestr(reltime())
-    let seconds = strpart(current_time, 6, 4)
-    let milliseconds = strpart(current_time, 11, 3)
+    let splitted_current_time = split(current_time, '\.')
+    let seconds_length = strlen(splitted_current_time[0])
+    let seconds = splitted_current_time[0][seconds_length - 4:seconds_length]
+    let milliseconds = splitted_current_time[1][0:2]
     return seconds . milliseconds
 
 endfunction
