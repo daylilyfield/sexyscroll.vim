@@ -46,25 +46,26 @@ let b:start_time = 0
 
 function! g:sexyscroll(direction, lines, duration)
 
-    if !s:is_currently_running()
-
-        call s:check_arguments(a:direction, a:lines, a:duration)
-    
-        let b:direction = a:direction
-        let b:lines = a:lines
-        let b:duration = a:duration
-    
-        call s:install_autocmd()
-    
-        if empty(g:sexyscroll_current_scrolling_buffers)
-            let g:updatetime_backup = &updatetime
-            let &updatetime = g:sexyscroll_update_display_per_milliseconds
-        endif
-    
-        let g:sexyscroll_current_scrolling_buffers[bufnr('%')] = 1
-        let b:start_time = s:get_comparable_current_time()
-
+    if s:is_currently_running()
+        call s:finish_scrolling()
     endif
+
+    call s:check_arguments(a:direction, a:lines, a:duration)
+
+    let b:direction = a:direction
+    let b:lines = a:lines
+    let b:duration = a:duration
+
+    call s:install_autocmd()
+
+    if empty(g:sexyscroll_current_scrolling_buffers)
+        let g:updatetime_backup = &updatetime
+        let &updatetime = g:sexyscroll_update_display_per_milliseconds
+    endif
+
+    let g:sexyscroll_current_scrolling_buffers[bufnr('%')] = 1
+    let b:start_time = s:get_comparable_current_time()
+    let b:total_moved = 0
 
 endfunction
 
