@@ -22,7 +22,7 @@
 " DEALINGS IN THE SOFTWARE. }}}
 " --------------------------------------------------------------------------- 
 
-if exists('g:did_load_sexyscroll')
+if exists('g:did_load_sexyscroll') && g:did_load_sexyscroll == 1
     finish
 endif
 
@@ -117,6 +117,7 @@ function! s:step()
         endif
         call feedkeys("f\e", 'n')
     endif
+
 endfunction
 
 function! s:is_on_edge()
@@ -131,10 +132,12 @@ endfunction
 function! s:finish_scrolling()
 
     call remove(g:sexyscroll_current_scrolling_buffers, bufnr('%'))
+
     if empty(g:sexyscroll_current_scrolling_buffers)
         call s:uninstall_autocmd()
         let &updatetime = g:sexyscroll_updatetime_backup
     endif
+
     let b:direction = ''
     let b:lines = 0
     let b:duration = 0
@@ -171,11 +174,20 @@ function! s:get_comparable_current_time()
 
 endfunction
 
-if g:sexyscroll_map_recommended_settings
+function! s:install_recommended_settings()
+
     nnoremap <silent> <buffer> <C-d> :<C-u>call g:sexyscroll('down', &scroll, 500)<CR>
     nnoremap <silent> <buffer> <C-u> :<C-u>call g:sexyscroll('up', &scroll, 500)<CR>
     nnoremap <silent> <buffer> <C-f> :<C-u>call g:sexyscroll('down', &scroll * 2, 500)<CR>
     nnoremap <silent> <buffer> <C-b> :<C-u>call g:sexyscroll('up', &scroll * 2, 500)<CR>
+
+endfunction
+
+if g:sexyscroll_map_recommended_settings
+    augroup sexyscroll_recommended_settings
+        autocmd!
+        autocmd BufRead * :call <SID>install_recommended_settings()
+    augroup end
 endif
 
 " vim: foldmethod=marker
