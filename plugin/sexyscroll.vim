@@ -44,7 +44,7 @@ let b:duration = 0
 let b:total_moved = 0
 let b:start_time = 0
 
-function! g:sexyscroll(direction, lines, duration)
+function! SexyScroll(direction, lines, duration)
 
     if s:is_currently_running()
         call s:finish_scrolling()
@@ -176,10 +176,10 @@ endfunction
 
 function! s:install_recommended_settings()
 
-    nnoremap <silent> <buffer> <C-d> :<C-u>call g:sexyscroll('down', &scroll, 500)<CR>
-    nnoremap <silent> <buffer> <C-u> :<C-u>call g:sexyscroll('up', &scroll, 500)<CR>
-    nnoremap <silent> <buffer> <C-f> :<C-u>call g:sexyscroll('down', &scroll * 2, 500)<CR>
-    nnoremap <silent> <buffer> <C-b> :<C-u>call g:sexyscroll('up', &scroll * 2, 500)<CR>
+    nnoremap <silent> <buffer> <C-d> :<C-u>call SexyScroll('down', &scroll, 500)<CR>
+    nnoremap <silent> <buffer> <C-u> :<C-u>call SexyScroll('up', &scroll, 500)<CR>
+    nnoremap <silent> <buffer> <C-f> :<C-u>call SexyScroll('down', &scroll * 2, 500)<CR>
+    nnoremap <silent> <buffer> <C-b> :<C-u>call SexyScroll('up', &scroll * 2, 500)<CR>
 
 endfunction
 
